@@ -1,0 +1,209 @@
+/* Page-level styles. Colours, type, spacing and radii come only from @carekind/shared tokens.css. */
+/* DESIGN.md is the source of truth; layout widths follow DESIGN §4 and the side-nav spec. */
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+	background: var(--ck-color-canvas);
+	color: var(--ck-color-ink);
+	font-family: var(--ck-font-text);
+	font-size: var(--ck-type-body-size);
+	font-weight: var(--ck-type-body-weight);
+	line-height: var(--ck-type-body-line-height);
+	letter-spacing: var(--ck-type-body-letter-spacing);
+}
+
+h1,
+h2,
+p,
+dl,
+dd,
+ul {
+	margin: 0;
+}
+
+a {
+	color: var(--ck-color-primary);
+}
+
+:focus-visible {
+	outline: 2px solid var(--ck-color-primary-focus);
+	outline-offset: 2px;
+}
+
+.visually-hidden {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
+	clip-path: inset(50%);
+	white-space: nowrap;
+}
+
+.skip-link {
+	position: absolute;
+	left: var(--ck-space-md);
+	top: calc(-1 * var(--ck-space-xxl));
+	padding: var(--ck-space-xs) var(--ck-space-md);
+	background: var(--ck-color-canvas);
+	border-radius: var(--ck-radius-sm);
+}
+
+.skip-link:focus {
+	top: var(--ck-space-md);
+}
+
+/* Layout: 240px side-nav + content capped at 1440px (DESIGN §4 admin-web). */
+.app-layout {
+	display: grid;
+	grid-template-columns: 240px minmax(0, 1fr);
+	min-height: 100vh;
+}
+
+.app-layout__main {
+	width: 100%;
+	max-width: 1440px;
+	padding: var(--ck-space-xl);
+}
+
+.app-layout__main:focus {
+	outline: none;
+}
+
+/* Text-first pages (forms) are capped at 980px (DESIGN §4). */
+.page-narrow {
+	max-width: 980px;
+}
+
+.page-header {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: flex-start;
+	justify-content: space-between;
+	gap: var(--ck-space-md);
+	margin-bottom: var(--ck-space-lg);
+}
+
+.page-header__title {
+	font-family: var(--ck-font-display);
+	font-size: var(--ck-type-title-size);
+	font-weight: var(--ck-type-title-weight);
+	line-height: var(--ck-type-title-line-height);
+	letter-spacing: var(--ck-type-title-letter-spacing);
+}
+
+.page-header__description {
+	margin-top: var(--ck-space-xs);
+	color: var(--ck-color-ink-muted);
+}
+
+.page-header__actions {
+	display: flex;
+	gap: var(--ck-space-sm);
+	align-items: center;
+}
+
+.page-footer-link {
+	margin-top: var(--ck-space-lg);
+}
+
+.section {
+	margin-top: var(--ck-space-xxl);
+}
+
+.section__header {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+	gap: var(--ck-space-md);
+	margin-bottom: var(--ck-space-md);
+}
+
+.section__title {
+	font-size: var(--ck-type-tagline-size);
+	font-weight: var(--ck-type-tagline-weight);
+	line-height: var(--ck-type-tagline-line-height);
+	letter-spacing: var(--ck-type-tagline-letter-spacing);
+	margin-bottom: var(--ck-space-md);
+}
+
+.section__header .section__title {
+	margin-bottom: 0;
+}
+
+.section__text {
+	margin-bottom: var(--ck-space-md);
+}
+
+.cell-secondary {
+	display: block;
+	color: var(--ck-color-ink-muted);
+	font-size: var(--ck-type-caption-size);
+	line-height: var(--ck-type-caption-line-height);
+}
+
+.summary-list__row {
+	display: grid;
+	grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+	gap: var(--ck-space-md);
+	padding: var(--ck-space-sm) 0;
+	border-bottom: 1px solid var(--ck-color-hairline);
+}
+
+.summary-list dt {
+	color: var(--ck-color-ink-muted);
+}
+
+/* Login: a single centred card on parchment. */
+.login {
+	min-height: 100vh;
+	display: grid;
+	place-items: center;
+	padding: var(--ck-space-md);
+	background: var(--ck-color-canvas-parchment);
+}
+
+.login__card {
+	width: 100%;
+	max-width: 400px;
+	padding: var(--ck-space-xl);
+	background: var(--ck-color-canvas);
+	border: 1px solid var(--ck-color-hairline);
+	border-radius: var(--ck-radius-lg);
+}
+
+.login__product {
+	color: var(--ck-color-ink-muted);
+	font-size: var(--ck-type-caption-strong-size);
+	font-weight: var(--ck-type-caption-strong-weight);
+}
+
+.login__title {
+	margin-bottom: var(--ck-space-lg);
+	font-family: var(--ck-font-display);
+	font-size: var(--ck-type-title-size);
+	font-weight: var(--ck-type-title-weight);
+	line-height: var(--ck-type-title-line-height);
+}
+
+/* Below 834px the side-nav collapses to a Menu button (DESIGN SideNav). */
+@media (max-width: 833px) {
+	.app-layout {
+		grid-template-columns: minmax(0, 1fr);
+	}
+
+	.app-layout__main {
+		padding: var(--ck-space-md);
+	}
+
+	.summary-list__row {
+		grid-template-columns: minmax(0, 1fr);
+		gap: var(--ck-space-xxs);
+	}
+}
